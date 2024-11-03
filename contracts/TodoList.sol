@@ -12,6 +12,7 @@ contract TodoList {
         string content;
         bool completed;
     }
+
     mapping(uint => Task) public tasks;
 
     constructor() public {
@@ -22,5 +23,9 @@ contract TodoList {
         taskCount = taskCount.add(1);
         tasks[taskCount] = Task(taskCount, _content, false);
     }
-	
+
+    function viewTask(uint _id) public view returns (uint, string memory, bool) {
+        Task memory task = tasks[_id];
+        return (task.id, task.content, task.completed);
+    }
 }
